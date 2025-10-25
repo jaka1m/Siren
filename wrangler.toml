@@ -1,7 +1,18 @@
-name = "siren"
+name = "geovpn"
 main = "build/worker/shim.mjs"
 compatibility_date = "2024-05-23"
 minify = true
+workers_dev = true
+
+routes = [
+  { pattern = "toas.gpj2.dpdns.org", custom_domain = true },
+  { pattern = "ava.game.naver.com.toas.gpj2.dpdns.org", custom_domain = true },
+  { pattern = "df.game.naver.com.toas.gpj2.dpdns.org", custom_domain = true },
+  { pattern = "graph.instagram.com.toas.gpj2.dpdns.org", custom_domain = true },
+  { pattern = "zaintest.vuclip.com.toas.gpj2.dpdns.org", custom_domain = true },
+  { pattern = "support.zoom.us.toas.gpj2.dpdns.org", custom_domain = true },
+  { pattern = "cache.netflix.com.toas.gpj2.dpdns.org", custom_domain = true }
+]
 
 [[kv_namespaces]]
 binding = "SIREN"
@@ -14,6 +25,11 @@ command = "cargo install worker-build && worker-build --release"
 build = { command = "cargo install worker-build && worker-build --dev" }
 
 [vars]
+
 UUID = "f282b878-8711-45a1-8c69-5564172123c1"
-MAIN_PAGE_URL = "https://raw.githubusercontent.com/FoolVPN-ID/Siren/refs/heads/master/web/index.html"
-SUB_PAGE_URL = "https://raw.githubusercontent.com/FoolVPN-ID/Siren/refs/heads/master/web/sub.html"
+
+MAIN_PAGE_URL = "https://raw.githubusercontent.com/jaka1m/vpn-cf/refs/heads/master/web/index.html"
+SUB_PAGE_URL  = "https://raw.githubusercontent.com/jaka1m/vpn-cf/refs/heads/master/web/sub.html"
+LINK_PAGE_URL = "https://raw.githubusercontent.com/jaka1m/vpn-cf/refs/heads/master/web/link.html"
+CONVERTER_PAGE_URL = "https://raw.githubusercontent.com/jaka1m/vpn-cf/refs/heads/master/web/converter.html"
+CHECKER_PAGE_URL = "https://raw.githubusercontent.com/jaka1m/vpn-cf/refs/heads/master/web/checker.html"
