@@ -5,13 +5,13 @@ minify = true
 workers_dev = true
 
 routes = [
-  { pattern = "jam.jambol4.biz.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
-  { pattern = "ava.game.naver.com.jam.jambol4.biz.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
-  { pattern = "df.game.naver.com.jam.jambol4.biz.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
-  { pattern = "graph.instagram.com.jam.jambol4.biz.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
-  { pattern = "zaintest.vuclip.com.jam.jambol4.biz.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
-  { pattern = "support.zoom.us.jam.jambol4.biz.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
-  { pattern = "cache.netflix.com.jam.jambol4.biz.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" }
+  { pattern = "jam.jambol4.web.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
+  { pattern = "ava.game.naver.com.jam.jambol4.web.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
+  { pattern = "df.game.naver.com.jam.jambol4.web.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
+  { pattern = "graph.instagram.com.jam.jambol4.web.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
+  { pattern = "zaintest.vuclip.com.jam.jambol4.web.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
+  { pattern = "support.zoom.us.jam.jambol4.web.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" },
+  { pattern = "cache.netflix.com.jam.jambol4.web.id", custom_domain = true, zone_id = "d4da15324c218fa9ac7db362f6e136dd" }
 ]
 
 [[kv_namespaces]]
