@@ -5,13 +5,13 @@ minify = true
 workers_dev = true
 
 routes = [
-  { pattern = "jam.jambol4.biz.id", custom_domain = true },
-  { pattern = "ava.game.naver.com.jam.jambol4.biz.id", custom_domain = true },
-  { pattern = "df.game.naver.com.jam.jambol4.biz.id", custom_domain = true },
-  { pattern = "graph.instagram.com.jam.jambol4.biz.id", custom_domain = true },
-  { pattern = "zaintest.vuclip.com.jam.jambol4.biz.id", custom_domain = true },
-  { pattern = "support.zoom.us.jam.jambol4.biz.id", custom_domain = true },
-  { pattern = "cache.netflix.com.jam.jambol4.biz.id", custom_domain = true }
+  { pattern = "jam.jambol4.biz.id", custom_domain = true, zone_name = "jambol4.biz.id" },
+  { pattern = "ava.game.naver.com.jam.jambol4.biz.id", custom_domain = true, zone_name = "jambol4.biz.id" },
+  { pattern = "df.game.naver.com.jam.jambol4.biz.id", custom_domain = true, zone_name = "jambol4.biz.id" },
+  { pattern = "graph.instagram.com.jam.jambol4.biz.id", custom_domain = true, zone_name = "jambol4.biz.id" },
+  { pattern = "zaintest.vuclip.com.jam.jambol4.biz.id", custom_domain = true, zone_name = "jambol4.biz.id" },
+  { pattern = "support.zoom.us.jam.jambol4.biz.id", custom_domain = true, zone_name = "jambol4.biz.id" },
+  { pattern = "cache.netflix.com.jam.jambol4.biz.id", custom_domain = true, zone_name = "jambol4.biz.id" }
 ]
 
 [[kv_namespaces]]
