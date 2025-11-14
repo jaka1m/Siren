@@ -2604,7 +2604,7 @@ serverDomainElements.forEach(element => {
       let bugType = formData.get("bug") ? formData.get("bug").toString().trim() : '';
       if (bugType === "manual") {
         const _0x4dfc0b = formPrefix + '-manual-bug';
-        const manualBugValue = document.getElementById(manualBugInputId).value.trim();
+        const manualBugValue = document.getElementById(_0x4dfc0b).value.trim();
         if (manualBugValue) {
   formData.set("bug", manualBugValue);
   bugType = manualBugValue;
@@ -2644,38 +2644,29 @@ serverDomainElements.forEach(element => {
           'sni': fullDomain,
           'scy': "zero"
         };
-        result = "vmess://" + btoa(JSON.stringify(_0x154eee));        
-      } else {
-        if (protocol === "vless") {
-  const uuid = proxyData.get("uuid");
-  const path = encodeURIComponent(proxyData.get("path"));
-  const security = proxyData.get("security");
-  const name = encodeURIComponent(proxyData.get("name"));
-  const port = security === "tls" ? 443 : 80;
-
-  url = `vless://${uuid}@${serverAddress}:${port}?encryption=none&security=${security}&type=ws&host=${hostAddress}&path=${path}&sni=${sniValue}#${name}`;
-} else {
-          if (protocol === "trojan") {
-  const password = proxyData.get("password");
-  const path = encodeURIComponent(proxyData.get("path"));
-  const security = proxyData.get('security');
-  const name = encodeURIComponent(proxyData.get("name"));
-  const port = security === 'tls' ? 443 : 80;
-
-  url = `trojan://${password}@${serverAddress}:${port}?security=${security}&type=ws&host=${hostAddress}&path=${path}&sni=${sniValue}#${name}`;
-} else {
-            if (protocol === 'ss') {
-  const password = proxyData.get("password");
-  const name = encodeURIComponent(proxyData.get("name"));
-  const path = encodeURIComponent(proxyData.get('path'));
-  const security = proxyData.get("security");
-  const port = security === "tls" ? 443 : 80;
-  const encodedPassword = btoa("none:" + password);
-
-  url = `ss://${encodedPassword}@${serverAddress}:${port}?encryption=none&type=ws&host=${hostAddress}&path=${path}&security=${security}&sni=${sniValue}#${name}`;
-}
-          }
-        }
+        result = "vmess://" + btoa(JSON.stringify(_0x154eee));
+      } else if (formPrefix === "vless") {
+        const uuid = formData.get("uuid");
+        const path = encodeURIComponent(formData.get("path"));
+        const security = formData.get("security");
+        const name = encodeURIComponent(formData.get("name"));
+        const port = security === "tls" ? 443 : 80;
+        result = `vless://${uuid}@${domainForWildcard}:${port}?encryption=none&security=${security}&type=ws&host=${domainWithPrefix}&path=${path}&sni=${fullDomain}#${name}`;
+      } else if (formPrefix === "trojan") {
+        const password = formData.get("password");
+        const path = encodeURIComponent(formData.get("path"));
+        const security = formData.get('security');
+        const name = encodeURIComponent(formData.get("name"));
+        const port = security === 'tls' ? 443 : 80;
+        result = `trojan://${password}@${domainForWildcard}:${port}?security=${security}&type=ws&host=${domainWithPrefix}&path=${path}&sni=${fullDomain}#${name}`;
+      } else if (formPrefix === 'ss') {
+        const password = formData.get("password");
+        const name = encodeURIComponent(formData.get("name"));
+        const path = encodeURIComponent(formData.get('path'));
+        const security = formData.get("security");
+        const port = security === "tls" ? 443 : 80;
+        const encodedPassword = btoa("none:" + password);
+        result = `ss://${encodedPassword}@${domainForWildcard}:${port}?encryption=none&type=ws&host=${domainWithPrefix}&path=${path}&security=${security}&sni=${fullDomain}#${name}`;
       }
       document.getElementById('connection-url').textContent = result;
       generateQRCode(result);
