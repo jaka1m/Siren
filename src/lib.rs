@@ -18,9 +18,12 @@ static PROXYKV_PATTERN: Lazy<Regex> = Lazy::new(|| Regex::new(r"^([A-Z]{2})").un
 
 #[event(fetch)]
 async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
-    let uuid = env
-        .var("UUID")
-        .map(|x| Uuid::parse_str(&x.to_string()).unwrap_or_default())?;
+    let uuid = env.var("UUID").map(|x| {
+        x.to_string()
+            .split(',')
+            .filter_map(|x| Uuid::parse_str(x.trim()).ok())
+            .collect()
+    })?;
     let host = req.url()?.host().map(|x| x.to_string()).unwrap_or_default();
     let main_page_url = env.var("MAIN_PAGE_URL").map(|x| x.to_string()).unwrap();
     let sub_page_url = env.var("SUB_PAGE_URL").map(|x| x.to_string()).unwrap();
