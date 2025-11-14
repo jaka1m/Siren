@@ -1,31 +1,31 @@
+<!DOCTYPE html>
 <html lang="en">
- <head>
-     <link rel="icon" href="https://raw.githubusercontent.com/jaka2m/mau/refs/heads/kepo/G.png" type="image/png">
-    <meta property="og:title" content="Geo Project" />
-    <meta property="og:description" content="Create your V2Ray account effortlessly and experience a secure, anonymous internet connection. Protect your privacy and enjoy unrestricted access to content from anywhere in the world." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/jaka2m/mau/refs/heads/kepo/geo.png" />
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/jaka2m/mau/refs/heads/kepo/geo.png"/>
-    <meta property="og:url" content="https://jam.jambol4.web.id/" />
-    <meta property="og:type" content="website" />
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="VLESS VMESS TROJAN SHADOESOCKS" />
-    <meta name="twitter:description" content="Create your V2Ray account effortlessly and experience a secure, anonymous internet connection. Protect your privacy and enjoy unrestricted access to content from anywhere in the world." />
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/jaka2m/mau/refs/heads/kepo/geo.png" />
-    <meta property="twitter:image:secure_url" content="https://raw.githubusercontent.com/jaka2m/mau/refs/heads/kepo/geo.png"/>
-    <meta name="twitter:url" content="https://jam.jambol4.web.id/" />
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   GEO - PROJECT
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEO-PROJECT </title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/jaka2m/project/refs/heads/main/social/bot.png">
+    
+    <!-- Meta tags -->
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/akulelaki696/bg/refs/heads/main/20250106_010158.jpg"/>
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)"/>
+    <meta name="theme-color" content="#f8f9fa" media="(prefers-color-scheme: light)"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External JavaScript -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 
     <style>
       
@@ -157,6 +157,43 @@ ol {
 
 .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.15);
+}
+
+/* Navigation buttons */
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.nav-button {
+  background: rgba(106, 17, 203, 0.1);
+  border: 1px solid rgba(106, 17, 203, 0.2);
+  color: var(--text-secondary);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-button:hover {
+  background: rgba(106, 17, 203, 0.2);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-primary);
+}
+
+.nav-button.active {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  box-shadow: var(--glow-primary);
 }
 
 .nav-highlight {
@@ -355,6 +392,15 @@ ol {
     font-size: 0.9rem;
   }
 
+  .nav-buttons {
+    gap: 8px;
+  }
+
+  .nav-button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
   .nav-highlight {
     margin-top: 10px;
     display: inline-block;
@@ -370,6 +416,16 @@ ol {
     padding: 8px 16px;
     font-size: 0.8rem;
   }
+
+  .nav-buttons {
+    gap: 5px;
+  }
+
+  .nav-button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
 
 /* Current year script support */
 #current-year {
@@ -426,6 +482,17 @@ ol {
   }
 }
 
+@media (max-width: 480px) {
+  .nav-buttons {
+    gap: 5px;
+  }
+
+  .nav-button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
+/* Link generator page specific styles */
 :root {
   --primary: #6a11cb;
   --primary-dark: #4f46e5;
@@ -597,22 +664,23 @@ body::before {
   right: 40px;
   transform: rotate(45deg);
 }
+
+/* Navigation buttons */
 .nav-buttons {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap; /* Tombol akan wrap (pindah baris) */
+  gap: 10px;
   padding: 15px 0;
+  flex-wrap: wrap;
 }
 
 .nav-button {
-  background: rgba(106, 17, 203, 0.4);  /* Lebih terang */
-  border: 1px solid rgba(106, 17, 203, 0.5);  /* Meningkatkan kecerahan border */
-  color: var(--text-secondary);
-  padding: 6px 12px;
+  background: rgba(106, 17, 203, 0.1);
+  border: 1px solid rgba(106, 17, 203, 0.2);
+  color: var(--gray-light);
+  padding: 8px 15px;
   border-radius: 20px;
-  font-size: 0.85rem; 
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   text-decoration: none;
   display: flex;
@@ -621,20 +689,18 @@ body::before {
 }
 
 .nav-button:hover {
-  background: rgba(106, 17, 203, 0.5);  /* Meningkatkan kecerahan saat hover */
-  color: var(--text-primary);
-  transform: translateY(-3px);  /* Memberikan efek gerakan lebih tajam */
-  box-shadow: 0 0 15px rgba(106, 17, 203, 0.7); /* Bayangan lebih terang */
-  border-color: rgba(106, 17, 203, 0.6); /* Border lebih cerah saat hover */
+  background: rgba(106, 17, 203, 0.2);
+  color: var(--light);
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
 }
 
 .nav-button.active {
-  background: linear-gradient(90deg, #00ff00, #00cc33, #009900); /* Gradien hijau dengan nuansa Matrix */
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   color: white;
   border: none;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Efek glow hijau */
+  box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
 }
-
 
 .glass-input {
   background: rgba(15, 23, 42, 0.6);
