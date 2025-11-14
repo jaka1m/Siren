@@ -1882,7 +1882,7 @@ body::before {
                         <div class="flex">
                             <input type="text" id="proxy-url" class="flex-1 px-4 py-2.5 glass-input rounded-l-lg text-sm" 
                                 placeholder="Enter custom proxy list URL" 
-                                value="https://raw.githubusercontent.com/jaka2m/botak/refs/heads/main/cek/proxyList.txt">
+                                value="https://raw.githubusercontent.com/paoandest/botak/refs/heads/main/cek/proxyList.txt">
                             <button id="load-custom-url" class="primary-btn px-4 py-2.5 rounded-r-lg">
                                 Load
                             </button>
@@ -2465,9 +2465,9 @@ function populateBugOptions() {
 
 document.addEventListener("DOMContentLoaded", () => {
   displayFallbackProxyList();
-  loadProxyList("https://raw.githubusercontent.com/jaka2m/botak/refs/heads/main/cek/proxyList.txt");
+  loadProxyList("https://raw.githubusercontent.com/paoandest/botak/refs/heads/main/cek/proxyList.txt");
   document.getElementById("refresh-btn").addEventListener("click", () => {
-    loadProxyList("https://raw.githubusercontent.com/jaka2m/botak/refs/heads/main/cek/proxyList.txt");
+    loadProxyList("https://raw.githubusercontent.com/paoandest/botak/refs/heads/main/cek/proxyList.txt");
   });
   document.getElementById("custom-url-btn").addEventListener("click", () => {
     customUrlInput.classList.toggle('hidden');
