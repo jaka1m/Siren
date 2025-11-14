@@ -2998,7 +2998,7 @@ function renderProxyList() {
 }
 
 function checkProxyStatusInList(proxy, statusIndicator) {
-  const statusURL = `https://cors.checker-ip.web.id/?url=https://api.checker-ip.web.id/check?ip=${proxy.ip}:${proxy.port}`;
+  const statusURL = `https://cors.checker-ip.web.id/?url=https://api.jas.biz.id/check?ip=${proxy.ip}:${proxy.port}`;
 
   fetch(statusURL)
     .then(response => response.json())
@@ -3191,7 +3191,7 @@ checkProxyStatus(selectedProxy);
 // Function to check proxy status in the account creation section
 function checkProxyStatus(proxy) {
     const startTime = performance.now();
-    const statusURL = `https://cors.checker-ip.web.id/?url=https://api.checker-ip.web.id/check?ip=${proxy.ip}:${proxy.port}`;
+    const statusURL = `https://cors.checker-ip.web.id/?url=https://api.jas.biz.id/check?ip=${proxy.ip}:${proxy.port}`;
     const statusContainer = document.getElementById('proxy-status-container');
     const statusLoading = document.getElementById('proxy-status-loading');
     const statusActive = document.getElementById('proxy-status-active');
