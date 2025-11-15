@@ -331,39 +331,6 @@ select.form-control {
     font-size: 0.9rem;
 }
 
-/* Responsive adjustments */
-@media (max-width: 480px) {
-    :root {
-        --card-padding: 1.2rem;
-    }
-    
-    .container {
-        padding: 0 0.5rem;
-    }
-    
-    .title {
-        font-size: 1.5rem;
-    }
-    
-    .subtitle {
-        font-size: 0.8rem;
-    }
-    
-    .form-group label {
-        font-size: 0.9rem;
-    }
-    
-    .form-control {
-        padding: 0.6rem 0.7rem;
-        font-size: 0.9rem;
-    }
-    
-    .btn {
-        padding: 0.7rem;
-        font-size: 0.9rem;
-    }
-}
-
 /* Cyberpunk details */
 .tech-detail {
     position: absolute;
@@ -676,68 +643,6 @@ select.form-control {
     font-style: italic;
 }
 
-.download-btn {
-    margin-top: 10px;
-    padding: 10px 16px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 600;
-    border-radius: 6px;
-    background: rgba(0, 120, 220, 0.2); /* Lebih terang dan biru */
-    border: 1px solid rgba(0, 160, 255, 0.5); /* Border lebih cerah */
-    color: #ffffff;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0, 160, 255, 0.3);
-}
-
-.download-btn:hover {
-    background: rgba(0, 160, 255, 0.35); /* Hover lebih terang */
-    border-color: rgba(0, 200, 255, 0.7);
-    box-shadow: 0 6px 28px rgba(0, 200, 255, 0.35);
-    transform: translateY(-2px);
-}
-
-.download-icon {
-    width: 18px;
-    height: 18px;
-}
-
-.copy-btn {
-    margin-top: 10px;
-    padding: 10px 16px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 600;
-    border-radius: 6px;
-    background: rgba(0, 120, 220, 0.2); /* Biru terang */
-    border: 1px solid rgba(0, 160, 255, 0.5);
-    color: #ffffff;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0, 160, 255, 0.3);
-}
-
-.copy-btn:hover {
-    background: rgba(0, 160, 255, 0.35);
-    border-color: rgba(0, 200, 255, 0.7);
-    box-shadow: 0 6px 28px rgba(0, 200, 255, 0.35);
-    transform: translateY(-2px);
-}
-
-.copy-icon {
-    width: 18px;
-    height: 18px;
-}
-
 .action-buttons {
     display: flex;
     justify-content: space-between;
@@ -747,18 +652,16 @@ select.form-control {
     flex-wrap: wrap;
 }
 
-.copy-btn, .download-btn {
+.copy-btn, .download-btn, .qrcode-btn, .list-btn {
     flex: 1;
     justify-content: center;
     text-align: center;
-}
-
-.qrcode-btn {
+    font-size: 0.6rem;
+    padding: 9px 10px;
+    text-decoration: none;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    margin: 20px auto;
-    padding: 10px 16px;
+    margin: 0 auto;
     font-family: 'Orbitron', sans-serif;
     font-weight: 600;
     border-radius: 6px;
@@ -771,17 +674,16 @@ select.form-control {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 20px rgba(0, 160, 255, 0.3);
-    display: flex;
 }
 
-.qrcode-btn:hover {
+.copy-btn:hover, .download-btn:hover, .qrcode-btn:hover, .list-btn:hover {
     background: rgba(0, 160, 255, 0.35);
     border-color: rgba(0, 200, 255, 0.7);
     box-shadow: 0 6px 28px rgba(0, 200, 255, 0.35);
     transform: translateY(-2px);
 }
 
-.qrcode-icon {
+.qrcode-icon, .copy-icon, .download-icon {
     width: 18px;
     height: 18px;
     transition: all 0.3s ease;
@@ -796,7 +698,7 @@ select.form-control {
     justify-content: center;
 }
 
-  footer {
+footer {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -811,95 +713,85 @@ select.form-control {
 
 .spacer {
     margin-top: 50px;
-  }
-  
-  .copy-btn,
-.list-btn,
-.download-btn,
-.qrcode-btn {
-  font-size: 0.6rem;
-  padding: 9px 10px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-}
-
-.qrcode-btn i,
-.copy-btn i,
-.list-btn i,
-.download-btn i {
-  margin-right: 5px;
 }
 
 .nav-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .nav-button {
-  background: rgba(106, 17, 203, 0.1);
-  border: 1px solid rgba(106, 17, 203, 0.2);
-  color: var(--text-secondary);
-  padding: 8px 15px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+    background: rgba(106, 17, 203, 0.1);
+    border: 1px solid rgba(106, 17, 203, 0.2);
+    color: var(--color-text);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .nav-button:hover {
-  background: rgba(106, 17, 203, 0.2);
-  color: var(--text-primary);
-  transform: translateY(-2px);
-  box-shadow: var(--glow-primary);
+    background: rgba(106, 17, 203, 0.2);
+    color: var(--color-text);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-primary);
 }
 
 .nav-button.active {
-  background: linear-gradient(90deg, #7e22ce, #2563eb); /* ungu ke biru */
-  color: white;
-  border: none;
-  box-shadow: 0 0 10px rgba(126, 34, 206, 0.5); /* glow ungu */
+    background: linear-gradient(90deg, #7e22ce, #2563eb);
+    color: white;
+    border: none;
+    box-shadow: 0 0 10px rgba(126, 34, 206, 0.5);
 }
 
-.nav-buttons {
-    gap: 8px;
-  }
-
-.nav-button {
-    padding: 6px 12px;
-    font-size: 0.85rem;
-  }
-
-.nav-buttons {
-    gap: 5px;
-  }
-
-.nav-button {
-    padding: 6px 10px;
-    font-size: 0.8rem;
-  }
-}
-
+/* Responsive adjustments */
 @media (max-width: 480px) {
-  .nav-buttons {
-    gap: 5px;
-  }
-
-  .nav-button {
-    padding: 6px 10px;
-    font-size: 0.8rem;
-  }
+    :root {
+        --card-padding: 1.2rem;
+    }
+    
+    .container {
+        padding: 0 0.5rem;
+    }
+    
+    .title {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
+    .form-control {
+        padding: 0.6rem 0.7rem;
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+    
+    .nav-buttons {
+        gap: 5px;
+    }
+    
+    .nav-button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
 }
-
-
 </style>
 </head>
 <body>
