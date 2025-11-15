@@ -50,13 +50,13 @@ pub async fn parse_addr<R: AsyncRead + std::marker::Unpin>(buf: &mut R) -> Resul
             buf.read_exact(&mut addr).await?;
             Ipv4Addr::new(addr[0], addr[1], addr[2], addr[3]).to_string()
         }
-        2 | 3 => {
+        2 => {
             let len = buf.read_u8().await?;
             let mut domain = vec![0u8; len as _];
             buf.read_exact(&mut domain).await?;
             String::from_utf8_lossy(&domain).to_string()
         }
-        4 => {
+        3 => {
             let mut addr = [0u8; 16];
             buf.read_exact(&mut addr).await?;
             Ipv6Addr::new(
