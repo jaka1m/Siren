@@ -5,7 +5,7 @@ minify = true
 workers_dev = true
 
 routes = [
-  { pattern = "vm.gpj.web.id", custom_domain = true, zone_id = "a645364c20affe14b42c46afb88da9df" },
+  { pattern = "vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
   { pattern = "ava.game.naver.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
   { pattern = "df.game.naver.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
   { pattern = "graph.instagram.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
