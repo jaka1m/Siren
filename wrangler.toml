@@ -5,13 +5,13 @@ minify = true
 workers_dev = true
 
 routes = [
-  { pattern = "vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
-  { pattern = "ava.game.naver.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
-  { pattern = "df.game.naver.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
-  { pattern = "graph.instagram.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
-  { pattern = "zaintest.vuclip.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
-  { pattern = "support.zoom.us.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
-  { pattern = "cache.netflix.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" }
+  { pattern = "vm.gpj1.web.id", custom_domain = true, zone_id = "79b26c840f79906706842b2db9f5b581" },
+  { pattern = "ava.game.naver.com.vm.gpj1.web.id", custom_domain = true, zone_id = "79b26c840f79906706842b2db9f5b581" },
+  { pattern = "df.game.naver.com.vm.gpj1.web.id", custom_domain = true, zone_id = "79b26c840f79906706842b2db9f5b581" },
+  { pattern = "graph.instagram.com.vm.gpj1.web.id", custom_domain = true, zone_id = "79b26c840f79906706842b2db9f5b581" },
+  { pattern = "zaintest.vuclip.com.vm.gpj1.web.id", custom_domain = true, zone_id = "79b26c840f79906706842b2db9f5b581" },
+  { pattern = "support.zoom.us.vm.gpj.web1.id", custom_domain = true, zone_id = "79b26c840f79906706842b2db9f5b581" },
+  { pattern = "cache.netflix.com.vm.gpj1.web.id", custom_domain = true, zone_id = "79b26c840f79906706842b2db9f5b581" }
 ]
 
 [[kv_namespaces]]
