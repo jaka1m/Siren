@@ -74,8 +74,8 @@ routes = [
 ]
 
 [[kv_namespaces]]
-binding = "SIREN"
-id = "46212c148b974a45badbf7125383797d"
+binding = "GEOVPN"
+id = "9217f1e77ee040daafccf9b7ac869441"
 
 [build]
 command = "cargo install -q worker-build && worker-build --release"
