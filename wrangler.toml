@@ -79,17 +79,11 @@ id = "1917c7eaf22b4dd490c1bc3454f72061"
 
 [build]
 command = "cargo install -q worker-build && worker-build --release"
-
-# PERBAIKAN: Tambahkan ini untuk menonaktifkan flag wasm-bindgen otomatis
-[build.wasm-bindgen]
-args = []
+# PERBAIKAN: Secara eksplisit tentukan argumen wasm-bindgen yang aman
+wasm-bindgen-args = ["--typescript", "--target", "module", "--out-name", "index"]
 
 [env.dev]
-build = { command = "cargo install -q worker-build && worker-build --dev" }
-
-# PERBAIKAN: Tambahkan ini untuk menonaktifkan flag wasm-bindgen otomatis di env dev
-[env.dev.build.wasm-bindgen]
-args = []
+build = { command = "cargo install -q worker-build && worker-build --dev", wasm-bindgen-args = ["--typescript", "--target", "module", "--out-name", "index"] }
 
 [vars]
 
