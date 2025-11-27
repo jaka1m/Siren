@@ -74,7 +74,7 @@ routes = [
 ]
 
 [[kv_namespaces]]
-binding = "GEOVPN"
+binding = "SIREN"
 id = "1917c7eaf22b4dd490c1bc3454f72061"
 
 [build]
