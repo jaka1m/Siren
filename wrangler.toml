@@ -79,9 +79,16 @@ id = "1917c7eaf22b4dd490c1bc3454f72061"
 
 [build]
 command = "cargo install -q worker-build && worker-build --release"
+# --- MULAI PERUBAHAN WASM-BINDGEN ---
+[build.wasm-bindgen]
+args = [] # Menonaktifkan argumen otomatis, termasuk yang bermasalah
 
 [env.dev]
 build = { command = "cargo install -q worker-build && worker-build --dev" }
+
+[env.dev.build.wasm-bindgen]
+args = [] # Menonaktifkan argumen otomatis di lingkungan dev juga
+# --- AKHIR PERUBAHAN WASM-BINDGEN ---
 
 [vars]
 
