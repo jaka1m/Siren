@@ -1,7 +1,5 @@
 name = "siren"
-# PERBAIKAN 1: Mengubah jalur dari .mjs ke .js. 
-# wasm-bindgen manual dengan --target module menghasilkan shim.js, bukan shim.mjs.
-main = "build/worker/shim.js" 
+main = "build/worker/shim.mjs"
 compatibility_date = "2024-05-23"
 minify = true
 workers_dev = true
@@ -20,18 +18,11 @@ routes = [
 binding = "GEOVPN"
 id = "96a271a6f0b948e783163eee8da31d8a"
 
-# PERBAIKAN 2: Hapus atau kosongi bagian [build].
-# Proses build kini ditangani sepenuhnya di cf.yml, 
-# dan Wrangler akan mencoba menjalankan command ini, yang bertentangan dengan build manual Anda.
-# Karena Anda memiliki dua environment, kita kosongkan saja:
 [build]
+command = "cargo install -q worker-build && worker-build --release"
 
 [env.dev]
-# PERBAIKAN 3: Kosongi atau hapus sub-bagian build di environment 'dev'.
-# Ini mengatasi WARNING 'Multiple environments' saat deploy tanpa --env.
-# Jika Anda tetap ingin menggunakan environment 'dev', Anda bisa mengosongkan build command-nya.
-build = {} 
-
+build = { command = "cargo install -q worker-build && worker-build --dev" }
 
 [vars]
 

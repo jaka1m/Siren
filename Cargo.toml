@@ -7,10 +7,11 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-# Dependensi Anda yang sudah ada
 tokio = { version = "1.28", features = ["io-util", "rt"] }
 serde_json = "1.0"
 base64 = "0.22"
+getrandom = { version = "0.2", features = ["js"] }
+worker = "0.5.0"
 futures-util = "0.3.28"
 pin-project-lite = "0.2"
 uuid = "1.8.0"
@@ -24,15 +25,6 @@ reqwest = "0.12.5"
 regex = "1.11.1"
 once_cell = "1.21.3"
 pretty-bytes = "0.2.2"
-
-# Dependensi Worker dan Wasm
-worker = "0.7.0" 
-getrandom = { version = "0.2", features = ["js"] }
-
-# >> PERBAIKAN UTAMA: Tambahkan wasm-bindgen secara eksplisit
-# Kita coba versi 0.2.106, yang sesuai dengan skema yang diminta proyek Anda di log error.
-# Jika ini gagal karena CLI Anda (worker-build) masih 0.2.105, ganti menjadi "0.2.105".
-wasm-bindgen = "0.2.106"
 
 
 [profile.release]
