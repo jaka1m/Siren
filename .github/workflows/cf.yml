@@ -21,34 +21,36 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          # Perlu menambahkan wasm32-unknown-unknown untuk target wasm
           target: wasm32-unknown-unknown 
-
-      # >> PERBAIKAN 1: Instal wasm-bindgen-cli ke versi yang kompatibel (0.2.106)
-      - name: Install wasm-bindgen-cli (Target Version)
+          
+      # >> PERBAIKAN: Instal wasm-bindgen-cli ke versi yang BENAR (0.2.106)
+      - name: Install wasm-bindgen-cli 0.2.106
         run: cargo install -f wasm-bindgen-cli --version 0.2.106
 
-      - name: Install worker-build
-        run: cargo install -q worker-build
-
-      # >> PERBAIKAN 2: Hapus langkah "Poison the cache" yang bermasalah.
-      # Langkah ini tidak diperlukan jika versi wasm-bindgen-cli sudah benar.
-      #- name: Poison the cache
-      #  run: |
-      #    worker-build --release || true
-      #    WASM_BINDGEN_CACHE_PATH=$(find ~/.cache/worker-build -type f -name "wasm-bindgen")
-      #    echo "Found wasm-bindgen at: $WASM_BINDGEN_CACHE_PATH"
-      #    cp "$(which wasm-bindgen)" "$WASM_BINDGEN_CACHE_PATH"
-
-      # Langkah Build akan berjalan dengan wasm-bindgen 0.2.106 yang sudah diinstal
-      - name: Build
-        run: worker-build --release
+      # Hapus langkah 'Install worker-build' karena kita akan menjalankan wasm-bindgen secara manual
+      
+      # >> PERBAIKAN: Pisahkan proses build Wasm dan proses binding
+      
+      # 1. Kompilasi Wasm (Ini menghasilkan target/wasm32-unknown-unknown/release/siren.wasm)
+      - name: Build Rust to Wasm (Cargo)
+        run: cargo build --release --target wasm32-unknown-unknown
+        
+      # 2. Jalankan wasm-bindgen secara manual menggunakan CLI 0.2.106 yang baru diinstal
+      # Kita menargetkan direktori 'build' sesuai dengan apa yang diharapkan oleh 'wrangler'
+      - name: Generate JS Bindings (wasm-bindgen CLI)
+        run: wasm-bindgen target/wasm32-unknown-unknown/release/siren.wasm --out-dir ./build --target web --out-name index --typescript 
+        # Catatan: "--target web" atau "module" mungkin diperlukan tergantung kebutuhan Anda, 
+        # saya menggunakan '--target web' sebagai standar, ganti ke 'module' jika Anda membutuhkannya.
+        
+      # Jika Anda masih melihat error --experimental-reset-state-function, 
+      # tambahkan flag itu ke perintah wasm-bindgen di atas.
 
       - name: Remove build command from wrangler.toml
-        # Ini diperlukan karena worker-build sudah membuat file Wasm yang siap deploy.
+        # Ini penting agar wrangler tidak mencoba memanggil worker-build lagi.
         run: sed -i '/^\[build\]$/,/^command/d' wrangler.toml
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # Jika Anda menggunakan `main` atau field lain di wrangler.toml, pastikan jalur outputnya benar.
