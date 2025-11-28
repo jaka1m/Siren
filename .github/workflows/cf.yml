@@ -23,7 +23,7 @@ jobs:
           toolchain: stable
 
       - name: Install wasm-bindgen-cli
-        run: cargo install -f wasm-bindgen-cli --version 0.2.100
+        run: cargo install -f wasm-bindgen-cli --version 0.2.106
 
       - name: Install worker-build
         run: cargo install -q worker-build
