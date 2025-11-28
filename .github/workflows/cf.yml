@@ -17,40 +17,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Rust
+      - name: Setup Rust Toolchain
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           target: wasm32-unknown-unknown 
           
-      # >> PERBAIKAN: Instal wasm-bindgen-cli ke versi yang BENAR (0.2.106)
+      # 1. Instal wasm-bindgen-cli ke versi yang kompatibel (0.2.106)
       - name: Install wasm-bindgen-cli 0.2.106
         run: cargo install -f wasm-bindgen-cli --version 0.2.106
 
-      # Hapus langkah 'Install worker-build' karena kita akan menjalankan wasm-bindgen secara manual
+      # Hapus langkah instalasi worker-build karena kita akan menjalankan wasm-bindgen secara manual.
       
-      # >> PERBAIKAN: Pisahkan proses build Wasm dan proses binding
-      
-      # 1. Kompilasi Wasm (Ini menghasilkan target/wasm32-unknown-unknown/release/siren.wasm)
+      # 2. Kompilasi Rust ke Wasm
       - name: Build Rust to Wasm (Cargo)
         run: cargo build --release --target wasm32-unknown-unknown
         
-      # 2. Jalankan wasm-bindgen secara manual menggunakan CLI 0.2.106 yang baru diinstal
-      # Kita menargetkan direktori 'build' sesuai dengan apa yang diharapkan oleh 'wrangler'
+      # 3. Jalankan wasm-bindgen secara manual
+      # Output diarahkan ke './build/worker' dengan nama 'shim' untuk mengikuti konvensi 'worker-build'.
       - name: Generate JS Bindings (wasm-bindgen CLI)
-        run: wasm-bindgen target/wasm32-unknown-unknown/release/siren.wasm --out-dir ./build --target web --out-name index --typescript 
-        # Catatan: "--target web" atau "module" mungkin diperlukan tergantung kebutuhan Anda, 
-        # saya menggunakan '--target web' sebagai standar, ganti ke 'module' jika Anda membutuhkannya.
+        run: wasm-bindgen target/wasm32-unknown-unknown/release/siren.wasm --out-dir ./build/worker --target module --out-name shim --typescript
         
-      # Jika Anda masih melihat error --experimental-reset-state-function, 
-      # tambahkan flag itu ke perintah wasm-bindgen di atas.
-
+      # 4. Instal Wrangler versi 4 terbaru (mengatasi warning dan konflik)
+      - name: Install Latest Wrangler v4
+        run: npm install -g wrangler@4
+        
+      # 5. Hapus perintah build dari wrangler.toml (agar tidak terjadi double-build)
       - name: Remove build command from wrangler.toml
-        # Ini penting agar wrangler tidak mencoba memanggil worker-build lagi.
         run: sed -i '/^\[build\]$/,/^command/d' wrangler.toml
 
+      # 6. Jalankan Deploy menggunakan npx Wrangler
       - name: Deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          # Jika Anda menggunakan `main` atau field lain di wrangler.toml, pastikan jalur outputnya benar.
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # Tambahkan variabel lingkungan penting lainnya (misalnya, CLOUDFLARE_ACCOUNT_ID) jika diperlukan
