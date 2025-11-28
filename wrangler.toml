@@ -18,9 +18,6 @@ routes = [
 binding = "GEOVPN"
 id = "96a271a6f0b948e783163eee8da31d8a"
 
-[build]
-command = "cargo install -q worker-build && worker-build --release"
-
 [env.dev]
 build = { command = "cargo install -q worker-build && worker-build --dev" }
 
