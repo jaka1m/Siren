@@ -5,18 +5,18 @@ minify = true
 workers_dev = true
 
 routes = [
-  { pattern = "joss.checker-ip.xyz", custom_domain = true },
-  { pattern = "ava.game.naver.com.joss.checker-ip.xyz", custom_domain = true },
-  { pattern = "df.game.naver.com.joss.checker-ip.xyz", custom_domain = true },
-  { pattern = "graph.instagram.com.joss.checker-ip.xyz", custom_domain = true },
-  { pattern = "zaintest.vuclip.com.joss.checker-ip.xyz", custom_domain = true },
-  { pattern = "support.zoom.us.joss.checker-ip.xyz", custom_domain = true },
-  { pattern = "cache.netflix.com.joss.checker-ip.xyz", custom_domain = true }
+  { pattern = "vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
+  { pattern = "ava.game.naver.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
+  { pattern = "df.game.naver.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
+  { pattern = "graph.instagram.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
+  { pattern = "zaintest.vuclip.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
+  { pattern = "support.zoom.us.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" },
+  { pattern = "cache.netflix.com.vm.gpj.web.id", custom_domain = true, zone_id = "1ed6c0edb007945718e2eea6d2be1ed5" }
 ]
 
 [[kv_namespaces]]
-binding = "GEOVPN"
-id = "96a271a6f0b948e783163eee8da31d8a"
+binding = "SIREN"
+id = "46212c148b974a45badbf7125383797d"
 
 [build]
 command = "cargo install -q worker-build && worker-build --release"
@@ -28,8 +28,8 @@ build = { command = "cargo install -q worker-build && worker-build --dev" }
 
 UUID = "f282b878-8711-45a1-8c69-5564172123c1"
 
-MAIN_PAGE_URL = "https://raw.githubusercontent.com/jaka2m/vpn-cf/refs/heads/master/web/index.html"
-SUB_PAGE_URL  = "https://raw.githubusercontent.com/jaka2m/vpn-cf/refs/heads/master/web/sub.html"
-LINK_PAGE_URL = "https://raw.githubusercontent.com/jaka2m/vpn-cf/refs/heads/master/web/link.html"
-CONVERTER_PAGE_URL = "https://raw.githubusercontent.com/jaka2m/vpn-cf/refs/heads/master/web/converter.html"
-CHECKER_PAGE_URL = "https://raw.githubusercontent.com/jaka2m/vpn-cf/refs/heads/master/web/checker.html"
+MAIN_PAGE_URL = "https://raw.githubusercontent.com/jaka1m/Siren/refs/heads/master/web/index.html"
+SUB_PAGE_URL  = "https://raw.githubusercontent.com/jaka1m/Siren/refs/heads/master/web/sub.html"
+LINK_PAGE_URL = "https://raw.githubusercontent.com/jaka1m/Siren/refs/heads/master/web/link.html"
+CONVERTER_PAGE_URL = "https://raw.githubusercontent.com/jaka1m/Siren/refs/heads/master/web/converter.html"
+CHECKER_PAGE_URL = "https://raw.githubusercontent.com/jaka1m/Siren/refs/heads/master/web/checker.html"
