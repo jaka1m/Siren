@@ -1,4 +1,4 @@
-name = "siren"
+name = "enakan"
 main = "build/worker/shim.mjs"
 compatibility_date = "2024-05-23"
 minify = true
@@ -16,7 +16,7 @@ routes = [
 
 [[kv_namespaces]]
 binding = "GEOVPN"
-id = "96a271a6f0b948e783163eee8da31d8a"
+id = "9217f1e77ee040daafccf9b7ac869441"
 
 [env.dev]
 build = { command = "cargo install -q worker-build && worker-build --dev" }
