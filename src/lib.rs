@@ -16,7 +16,7 @@ static PROXYKV_PATTERN: Lazy<Regex> = Lazy::new(|| Regex::new(r"^([A-Z]{2})").un
 
 #[event(fetch)]
 async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
-    // Membantu debugging jika terjadi panic di Wasm
+    // Membantu debugging log di console Cloudflare
     console_error_panic_hook::set_once();
 
     let uuid_str = env.var("UUID").map(|x| x.to_string()).unwrap_or_default();
@@ -48,7 +48,8 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
         .await
 }
 
-// Handler Functions - Diletakkan di luar fungsi main
+// --- Route Handlers ---
+
 async fn fe(_: Request, cx: RouteContext<Config>) -> Result<Response> {
     get_response_from_url(cx.data.main_page_url.clone()).await
 }
@@ -79,6 +80,7 @@ async fn get_response_from_url(url: String) -> Result<Response> {
 async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> {
     let mut proxyip = cx.param("proxyip").map(|s| s.to_string()).unwrap_or_default();
     
+    // Logika pemilihan IP dari KV
     if PROXYKV_PATTERN.is_match(&proxyip) {
         let kvid_list: Vec<String> = proxyip.split(',').map(|s| s.to_string()).collect();
         let kv = cx.kv("SIREN")?;
@@ -106,6 +108,7 @@ async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> 
         }
     }
 
+    // Parsing IP-Port (format: ip-port)
     if PROXYIP_PATTERN.is_match(&proxyip) {
         if let Some((addr, port_str)) = proxyip.split_once('-') {
             if let Ok(port) = port_str.parse() {
@@ -115,12 +118,12 @@ async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> 
         }
     }
 
+    // WebSocket Tunneling
     let upgrade = req.headers().get("Upgrade")?.unwrap_or_default();
     if upgrade == "websocket" {
         let WebSocketPair { server, client } = WebSocketPair::new()?;
         server.accept()?;
 
-        // Clone config untuk digunakan di thread Wasm
         let config_data = cx.data.clone();
 
         wasm_bindgen_futures::spawn_local(async move {
