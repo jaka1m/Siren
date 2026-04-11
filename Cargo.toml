@@ -2,33 +2,47 @@
 name = "siren"
 version = "0.1.0"
 edition = "2021"
+authors = ["Muhammad Amin"]
 
 [lib]
+# Penting: cdylib diperlukan agar Rust menghasilkan file .wasm yang bisa dibaca JS
 crate-type = ["cdylib"]
 
 [dependencies]
+# Toolchain Cloudflare mewajibkan v0.8.0
 worker = "0.8.0"
-worker-macros = "0.8.0" # Penting untuk entry point
-serde_json = "1.0"
-base64 = "0.22"
+# Mengunci versi agar sinkron dengan build environment di GitHub Actions
+wasm-bindgen = "=0.2.118"
+# Penting: getrandom butuh fitur "js" untuk berjalan di browser/worker
 getrandom = { version = "0.2", features = ["js"] }
+
+# Networking & Async Utilities
+# Reqwest di Wasm harus mematikan default-features agar tidak error TLS
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde_json = "1.0"
 futures-util = "0.3.28"
-pin-project-lite = "0.2"
-uuid = "1.8.0"
 bytes = "1.4.0"
+
+# Data & Security
+base64 = "0.22"
+uuid = { version = "1.8.0", features = ["v4", "js"] }
 aes-gcm = "0.10"
 aes = "0.8"
 sha2 = "0.10"
 md-5 = "0.10"
+
+# Utilities
 anyhow = "1.0.86"
-reqwest = "0.12.5"
 regex = "1.11.1"
 once_cell = "1.21.3"
 pretty-bytes = "0.2.2"
-# Gunakan tokio yang sangat minimal karena Worker punya runtime sendiri
-tokio = { version = "1.28", features = ["io-util"] } 
+pin-project-lite = "0.2"
+
+# Tokio di Worker hanya bisa digunakan untuk utility (bukan runtime/multi-thread)
+tokio = { version = "1.28", default-features = false, features = ["io-util"] }
 
 [profile.release]
+# Optimasi ukuran file Wasm agar tetap kecil
 opt-level = "s"
 lto = true
 strip = true
