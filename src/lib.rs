@@ -11,22 +11,18 @@ use worker::*;
 use once_cell::sync::Lazy;
 use regex::Regex;
 
-// Gunakan block inisialisasi yang lebih aman untuk Wasm
 static PROXYIP_PATTERN: Lazy<Regex> = Lazy::new(|| Regex::new(r"^.+-\d+$").unwrap());
 static PROXYKV_PATTERN: Lazy<Regex> = Lazy::new(|| Regex::new(r"^([A-Z]{2})").unwrap());
 
 #[event(fetch)]
 async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
-    // Sangat penting untuk debugging Wasm
+    // Membantu debugging jika terjadi panic di Wasm
     console_error_panic_hook::set_once();
 
-    // Gunakan unwrap_or atau default agar tidak panic jika variabel Env kosong
     let uuid_str = env.var("UUID").map(|x| x.to_string()).unwrap_or_default();
     let uuid = Uuid::parse_str(&uuid_str).unwrap_or_default();
+    let host = req.url()?.host().map(|x| x.to_string()).unwrap_or_default();
     
-    let host = req.url()?.host().map(|x| x.to_string()).unwrap_or_else(|| "127.0.0.1".to_string());
-    
-    // Gunakan helper untuk ambil env var agar kode lebih bersih dan aman
     let get_env = |name: &str| env.var(name).map(|x| x.to_string()).unwrap_or_default();
 
     let config = Config { 
@@ -52,43 +48,60 @@ async fn main(req: Request, env: Env, _: Context) -> Result<Response> {
         .await
 }
 
-// ... fungsi fe, sub, link, converter, checker tetap sama ...
+// Handler Functions - Diletakkan di luar fungsi main
+async fn fe(_: Request, cx: RouteContext<Config>) -> Result<Response> {
+    get_response_from_url(cx.data.main_page_url.clone()).await
+}
+
+async fn sub(_: Request, cx: RouteContext<Config>) -> Result<Response> {
+    get_response_from_url(cx.data.sub_page_url.clone()).await
+}
+
+async fn link(_: Request, cx: RouteContext<Config>) -> Result<Response> {
+    get_response_from_url(cx.data.link_page_url.clone()).await
+}
+
+async fn converter(_: Request, cx: RouteContext<Config>) -> Result<Response> {
+    get_response_from_url(cx.data.converter_page_url.clone()).await
+}
+
+async fn checker(_: Request, cx: RouteContext<Config>) -> Result<Response> {
+    get_response_from_url(cx.data.checker_page_url.clone()).await
+}
+
+async fn get_response_from_url(url: String) -> Result<Response> {
+    if url.is_empty() { return Response::error("Empty URL", 400); }
+    let req = Fetch::Url(Url::parse(&url)?);
+    let mut res = req.send().await?;
+    Response::from_html(res.text().await?)
+}
 
 async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> {
     let mut proxyip = cx.param("proxyip").map(|s| s.to_string()).unwrap_or_default();
     
-    if PROXYKV_PATTERN.is_match(&proxyip)  {
+    if PROXYKV_PATTERN.is_match(&proxyip) {
         let kvid_list: Vec<String> = proxyip.split(',').map(|s| s.to_string()).collect();
         let kv = cx.kv("SIREN")?;
-        
         let mut proxy_kv_str = kv.get("proxy_kv").text().await?.unwrap_or_default();
         
-        // Perbaikan getrandom: inisialisasi buffer dengan benar
         let mut rand_buf = [0u8; 1];
-        if let Err(_) = getrandom::getrandom(&mut rand_buf) {
-            return Err(Error::from("Random generator failed"));
-        }
+        getrandom::getrandom(&mut rand_buf).map_err(|_| Error::from("Random Fail"))?;
 
         if proxy_kv_str.is_empty() {
             let req = Fetch::Url(Url::parse("https://raw.githubusercontent.com/FoolVPN-ID/Nautica/refs/heads/main/kvProxyList.json")?);
             let mut res = req.send().await?;
-            if res.status_code() == 200 {
-                proxy_kv_str = res.text().await?;
-                kv.put("proxy_kv", &proxy_kv_str)?.expiration_ttl(86400).execute().await?; 
-            } else {
-                return Err(Error::from(format!("KV Fetch failed: {}", res.status_code())));
-            }
+            proxy_kv_str = res.text().await?;
+            kv.put("proxy_kv", &proxy_kv_str)?.expiration_ttl(86400).execute().await?;
         }
 
         let proxy_kv: HashMap<String, Vec<String>> = serde_json::from_str(&proxy_kv_str)?;
-
         let kv_index = (rand_buf[0] as usize) % kvid_list.len();
-        let selected_kv_key = &kvid_list[kv_index];
+        let key = &kvid_list[kv_index];
 
-        if let Some(proxies) = proxy_kv.get(selected_kv_key) {
-            if !proxies.is_empty() {
-                let proxyip_index = (rand_buf[0] as usize) % proxies.len();
-                proxyip = proxies[proxyip_index].clone().replace(':', "-");
+        if let Some(ips) = proxy_kv.get(key) {
+            if !ips.is_empty() {
+                let ip_index = (rand_buf[0] as usize) % ips.len();
+                proxyip = ips[ip_index].clone().replace(':', "-");
             }
         }
     }
@@ -107,8 +120,9 @@ async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> 
         let WebSocketPair { server, client } = WebSocketPair::new()?;
         server.accept()?;
 
-        // Pindahkan data config agar bisa digunakan di thread wasm
+        // Clone config untuk digunakan di thread Wasm
         let config_data = cx.data.clone();
+
         wasm_bindgen_futures::spawn_local(async move {
             let events = server.events().expect("Failed to get events");
             if let Err(e) = ProxyStream::new(config_data, &server, events).process().await {
@@ -118,17 +132,6 @@ async fn tunnel(req: Request, mut cx: RouteContext<Config>) -> Result<Response> 
 
         Response::from_websocket(client)
     } else {
-        Response::from_html("Siren Wasm - WebSocket Required")
+        Response::from_html("Siren Wasm - Ready")
     }
-}
-
-// Helper function (Pastikan Response::from_html menerima String)
-async fn get_response_from_url(url: String) -> Result<Response> {
-    if url.is_empty() {
-        return Response::error("URL is empty", 400);
-    }
-    let req = Fetch::Url(Url::parse(&url)?);
-    let mut res = req.send().await?;
-    let body = res.text().await?;
-    Response::from_html(body)
 }
