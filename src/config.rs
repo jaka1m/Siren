@@ -1,11 +1,11 @@
 use uuid::Uuid;
 use serde::{Deserialize, Serialize};
 
-    pub struct Config {
+#[derive(Clone, Serialize, Deserialize, Debug)]
+pub struct Config {
     pub uuid: Uuid,
     pub proxy_addr: String,
     pub proxy_port: u16,
-
     pub main_page_url: String,
     pub sub_page_url: String,
     pub link_page_url: String,
