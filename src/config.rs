@@ -1,7 +1,6 @@
 use uuid::Uuid;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct Config {
     pub uuid: Uuid,
     pub proxy_addr: String,
